@@ -7,9 +7,8 @@ if(part_i == 1 && part_j == 1)
 elseif(part_i == 1 && part_j == 2)
     j = x3 * sin(x2 * x3);
 % 3x3 matrix
-%NOTE NEGATING ANSWER FOR BOOK CONSISTANCY
-elseif(part_i == 1 && part_j == 3) % book is positive, answer given negative
-    j = x2 * sin(x2 * x3) * -1;
+elseif(part_i == 1 && part_j == 3)
+    j = x2 * sin(x2 * x3);
 % END ROW 1
 %%%%%%%%%%%%%%
 

@@ -1,10 +1,11 @@
 function f = newtonSystem(n, x, tol, maxN)
 Fbar = zeros(n,1);
 jacob = zeros(n);
-k = 1;
+k = 1;  % step 1
 
-while (k <= maxN)
-   %do stuff
+while (k <= maxN)   % step 2
+   
+   % step 3
    for i=1:n
       Fbar(i) = F(x(1), x(2), x(3), i);     %Modify depending on number of systems
    end
@@ -14,11 +15,23 @@ while (k <= maxN)
        end
    end
    
-   y = linsolve(jacob, -Fbar);
+   % step 4
+   y = jacob\-Fbar;
+   %y = linsolve(jacob, -Fbar); %either works
    
+   % step 5
+   x = x + y'
+   
+   % step 6
+   %if (||y|| < tol)
+   %    x
+   %end
+   
+   % step 7
    k = k + 1;
 end
 
-Fbar
-jacob
-y
+Fbar;
+jacob;
+x;
+y;
