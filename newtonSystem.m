@@ -7,11 +7,11 @@ while (k <= maxN)   % step 2
    
    % step 3
    for i=1:n
-      Fbar(i) = F(x(1), x(2), x(3), i);     %Modify depending on number of systems
+      Fbar(i) = F(x(1), x(2), x(3), i);     %Modify x(i) depending on number of systems
    end
    for i=1:n
        for j = 1:n
-           jacob(i,j) = jacobian3(x(1), x(2), x(3), i, j); % Modify depending on number of systems
+           jacob(i,j) = jacobian3(x(1), x(2), x(3), i, j); % Modify x(i) depending on number of systems
        end
    end
    
@@ -20,12 +20,14 @@ while (k <= maxN)   % step 2
    %y = linsolve(jacob, -Fbar); %either works
    
    % step 5
-   x = x + y'
+   x = x + y';
    
    % step 6
-   %if (||y|| < tol)
-   %    x
-   %end
+   yMag = norm(y);
+   if (yMag < tol)
+       x
+       k = maxN;
+   end
    
    % step 7
    k = k + 1;
