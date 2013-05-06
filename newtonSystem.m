@@ -1,4 +1,4 @@
-function f = newtonSystem(n, x, tol, maxN)
+function f = newtonSystem(n, xVector, tol, maxN)
 Fbar = zeros(n,1);
 jacob = zeros(n);
 k = 1;  % step 1
@@ -7,11 +7,11 @@ while (k <= maxN)   % step 2
    
    % step 3
    for i=1:n
-      Fbar(i) = F(x(1), x(2), x(3), i);     %Modify x(i) depending on number of systems
+      Fbar(i) = F(xVector(1), xVector(2), i); %xVector(3), i);     %Modify x(i) depending on number of systems
    end
    for i=1:n
        for j = 1:n
-           jacob(i,j) = jacobian3(x(1), x(2), x(3), i, j); % Modify x(i) depending on number of systems
+           jacob(i,j) = jacobian3(xVector(1), xVector(2), i, j); % xVector(3), i, j); % Modify x(i) depending on number of systems
        end
    end
    
@@ -20,20 +20,27 @@ while (k <= maxN)   % step 2
    %y = linsolve(jacob, -Fbar); %either works
    
    % step 5
-   x = x + y';
+   xVector = xVector + y';
    
    % step 6
    yMag = norm(y);
    if (yMag < tol)
-       x
-       k = maxN;
+       xVector
+       break;
    end
    
    % step 7
    k = k + 1;
 end
 
+if(k > maxN)
+   fprintf('Exceeded maxN\n');
+   fprintf('Current x:');
+   xVector
+end
+
+
 Fbar;
 jacob;
-x;
+xVector;
 y;
